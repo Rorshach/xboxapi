@@ -14,7 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// 
+//
 // Route::get('/user', function () {
 //     return view('user');
 // });
@@ -24,3 +24,5 @@ Route::get('user/{id}', 'UserController@show');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('user/activation/{token}', 'Auth\AuthController@activateUser')->name('user.activate');
