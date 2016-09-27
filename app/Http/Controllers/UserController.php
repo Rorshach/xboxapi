@@ -7,14 +7,27 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+
     /**
-     * Show the profile for the given user.
+     * Create a new controller instance.
+     * Prevents guests from viewing this page
      *
-     * @param  int  $id
-     * @return Response
+     * @return void
      */
-    public function show($id)
+    public function __construct()
     {
-        return view('user.profile', ['user' => User::findOrFail($id)]);
+        $this->middleware('auth');
+    }
+
+
+    /**
+     * Show API details of given user.
+     *
+     *
+     */
+    public function show()
+    {
+        $id = Auth::user()->id;
+        return view('user',['api_key'=>User::name]);
     }
 }

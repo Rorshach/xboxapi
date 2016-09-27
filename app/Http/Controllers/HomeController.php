@@ -9,6 +9,7 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
+     * Prevents guests from viewing this page
      *
      * @return void
      */
