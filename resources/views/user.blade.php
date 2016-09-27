@@ -14,6 +14,9 @@
                         <div class="col-md-6">
                             <input id="text" type="text" class="form-control" name="api_key" value="{{$api_key}}">
                         </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fa fa-btn fa-sign-in"></i> Update
+                        </button>
 
                     </form>
                 </div>

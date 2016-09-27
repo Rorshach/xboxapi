@@ -18,6 +18,8 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+
 Route::get('/user', 'UserController@show');
+Route::post('/user/api_post', 'UserController@post');
 
 Route::get('user/activation/{token}', 'Auth\AuthController@activateUser')->name('user.activate');

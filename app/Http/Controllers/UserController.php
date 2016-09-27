@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -27,7 +28,25 @@ class UserController extends Controller
      */
     public function show()
     {
-        $id = Auth::user()->id;
-        return view('user',['api_key'=>User::name]);
+        $id = \Auth::user()->id;
+        return view('user',['api_key'=> User::find($id)->api]);
+    }
+
+    /**
+     * Update New API into user table
+     *
+     *
+     */
+    public function post(Request $request)
+    {
+        //var_dump($request->input('api_key'));
+        $api =$request->input('api_key');
+        $id = \Auth::user()->id;
+        $user = User::find($id);
+
+        $user->api = $api;
+        $user->save();
+
+        return redirect('/user');
     }
 }
