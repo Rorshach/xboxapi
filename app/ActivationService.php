@@ -29,7 +29,6 @@ class ActivationService
         }
 
         $token = $this->activationRepo->createActivation($user);
-
         $link = route('user.activate', $token);
         $message = sprintf('Click to activate account: %s', $link);
         $this->mailer->raw($message, function (Message $m) use ($user) {

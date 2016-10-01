@@ -5,19 +5,43 @@ use GuzzleHttp\Client;
     *
     *
     */
-    function helper($api,$url) {
-        if($api == NULL) {
+    function call_API($api,$url) {
+        if(strlen($api) < 40) {
             return NULL;
         }
-        $client = new GuzzleHttp\Client(['headers' => ['X-AUTH' => $api]]);
-        $url_call = "https://xboxapi.com/v2/".$url;
+        try {
+            $client = new GuzzleHttp\Client(['headers' => ['X-AUTH' => $api]]);
+            $url_call = "https://xboxapi.com/v2/".$url;
 
-        //$client->setDefaultOption('headers', ['X-AUTH' => $api]);
-        //$res = $client->request('GET', $url_call);
-        $res = $client->get($url_call);
+            $res = $client->get($url_call,['http_errors' => false]);
+        } catch (Exception $e) {
+            var_dump($e);
+             return redirect('/user');
+        }
 
         $response_string = $res->getBody()->getContents();
         return json_decode($response_string, true);
+    }
+
+    /**
+    *   Check if API Key is valid
+    *
+    *
+    */
+    function check_API($api) {
+        if(strlen($api) < 40) {
+            return false;
+        }
+        $client = new GuzzleHttp\Client(['headers' => ['X-AUTH' => $api]]);
+        $url_call = "https://xboxapi.com/v2/profile";
+
+        if ($client->request('GET',$url_call, ['http_errors' => false])->getStatusCode() != 202)
+            return false;
+        else
+            return true;
+
+
+
     }
 
 

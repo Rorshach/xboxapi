@@ -37,7 +37,7 @@ class UserController extends Controller
             try{
                 //Decrypted API + grab JSON with API
                 $decrypted_api = decrypt($encrypted_api);
-                $api_json_response = helper($decrypted_api,"profile");
+                $api_json_response = call_API($decrypted_api,"profile");
 
                 //Return view with gamerTag
                 return view('user',['gamerTag'=> $api_json_response['gamerTag']]);
@@ -53,18 +53,6 @@ class UserController extends Controller
 
     }
 
-    public function check_API() {
-        $id = \Auth::user()->id;
-        $encrypted_api = User::find($id)->api;
-
-        if ($encrypted_api == NULL){
-            return false;
-        } else {
-            return true;
-        }
-
-    }
-
     /**
      * Update New API into user table
      *
@@ -74,7 +62,7 @@ class UserController extends Controller
     {
         //Validate input
         $this->validate($request, [
-            'api_key' => 'required|min:40|filled',
+            'api_key' => 'required|min:40|filled|correctapi',
         ]);
 
         //Strip out white space
