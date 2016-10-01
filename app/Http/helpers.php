@@ -15,8 +15,7 @@ use GuzzleHttp\Client;
 
             $res = $client->get($url_call,['http_errors' => false]);
         } catch (Exception $e) {
-            var_dump($e);
-             return redirect('/user');
+             return redirect('/user')->withErrors(['Error with API Key, Try resubmitting the key']);;
         }
 
         $response_string = $res->getBody()->getContents();

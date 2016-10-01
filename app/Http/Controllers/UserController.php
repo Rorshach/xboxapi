@@ -37,13 +37,17 @@ class UserController extends Controller
             try{
                 //Decrypted API + grab JSON with API
                 $decrypted_api = decrypt($encrypted_api);
-                $api_json_response = call_API($decrypted_api,"profile");
+                $apiRes = call_API($decrypted_api,"profile");
+
+                if(isset($apiRes['error_code'])) {
+                    return view('user')->withErrors([$apiRes['error_message']]);
+                }
 
                 //Return view with gamerTag
-                return view('user',['gamerTag'=> $api_json_response['gamerTag']]);
+                return view('user',['gamerTag'=> $apiRes['gamerTag']]);
 
             } catch (DecryptException $e) {
-                var_dump($e);
+                return view('user')->withErrors(['Error Retrieving API Key, Try resubmitting the key']);
             }
         } else {
 

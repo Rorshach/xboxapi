@@ -19,7 +19,7 @@
                     @if (!Auth::user()->api)
                         <h5>API Key has not been filled yet </h5>
                     @else
-                        <h5>The current API Key belongs to {{$gamerTag}}</h5>
+                        <h5>The current API Key belongs to {{ $gamerTag or 'No One - Problem Occured' }}</h5>
                     @endif
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/user/api_post')  }}">
                         {{ csrf_field() }}
