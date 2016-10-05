@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
@@ -26,18 +27,21 @@ class HomeController extends Controller
     public function index()
     {
         //Grab api + Decrypt it
-        $api = decrypt(\Auth::user()->api);
+        $encryptedAPI = \Auth::user()->profile()->first()->api;
+        $uniqueGames = array();
+        if(isset($encryptedAPI)) {
+            $api = decrypt($encryptedAPI);
 
-        //Grab List of Games - played by user
-        $recent_JSON = call_API($api,"recent-players");
-        $uniqueGames = array_unique(array_map(function ($i) { return $i['titles'][0]['titleName']; }, $recent_JSON));
+            //Grab List of Games - played by user
+            $recent_JSON = call_API($api,"recent-players");
+            $uniqueGames = array_unique(array_map(function ($i) { return $i['titles'][0]['titleName']; }, $recent_JSON));
 
-        //$friends_JSON = call_API($api,$xuid['userXuid']."/friends");
-        //$convo_JSON = call_API($api,"conversations");
+            //$friends_JSON = call_API($api,$xuid['userXuid']."/friends");
+            //$convo_JSON = call_API($api,"conversations");
 
-        //PUT HERE AFTER YOU SAVE
-        \Session::flash('flash_message',"1. Write Message // 2. Choose Players // 3. Filter Out Players // 4. SEND");
-
+            //PUT HERE AFTER YOU SAVE
+            \Session::flash('flash_message',"1. Write Message // 2. Choose Players // 3. Filter Out Players // 4. SEND");
+        }
         return view('home',['uniqueGames' => $uniqueGames]);
     }
 
@@ -67,7 +71,7 @@ class HomeController extends Controller
 
     public function retrieveUsers($game, $friends, $convo) {
         //Grab api + Decrypt it
-        $api = decrypt(\Auth::user()->api);
+        $api = decrypt(\Auth::user()->profile()->api);
 
     }
 }

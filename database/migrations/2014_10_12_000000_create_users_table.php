@@ -16,7 +16,6 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->longText('api')->nullable();
             $table->boolean('activated')->default(false);
             $table->rememberToken();
             $table->timestamps();
@@ -30,6 +29,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
+        //Table dropped in Profile migration - because of foreign key
     }
 }

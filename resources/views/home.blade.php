@@ -7,7 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Main Messenger</div>
                 <div class="panel-body">
-                    @if (!Auth::user()->api)
+                    @if (!Auth::user()->profile()->first()->api)
                         <h5>API Key has not been filled yet </h5>
                         <p><a class="btn btn-primary btn-lg" href="/user" role="button">Input API Key</a></p>
                     @else

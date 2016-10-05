@@ -16,7 +16,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Profile Settings</div>
                 <div class="panel-body">
-                    @if (!Auth::user()->api)
+                    @if (!Auth::user()->profile()->first()->api)
                         <h5>API Key has not been filled yet </h5>
                     @else
                         <h5>The current API Key belongs to {{ $gamerTag or 'No One - Problem Occured' }}</h5>

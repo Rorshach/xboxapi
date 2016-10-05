@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Profile;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class UserController extends Controller
     public function show()
     {
         //Grab encrypted API
-        $encrypted_api = \Auth::user()->api;
+        $encrypted_api = \Auth::user()->profile()->first()->api;
 
         //If API is filled in DB
         if ($encrypted_api != NULL) {
@@ -74,14 +75,20 @@ class UserController extends Controller
         $api = $request->input('api_key');
         $api = str_replace(' ', '', $api);
 
+        //Grab Profile Information
+        $profile_JSON = call_API($api,'profile');
+        $gamertag = $profile_JSON['gamerTag'];//GT
+        $xuid = $profile_JSON['userXuid']; //XUID
         //Encrypt API key
         $Encr_api = encrypt($api);
 
-        //Store encrypted API
-        $user = \Auth::user();
-        $user->api = $Encr_api;
-        $user->save();
+        //Store new information
+        $profile = \Auth::user()->profile()->first();
+        $profile->api = $Encr_api; //Encrypted API Key
+        $profile->gamertag =$gamertag;
+        $profile->xuid = $xuid;
 
+        $profile->save();
         return redirect('/user');
     }
 }

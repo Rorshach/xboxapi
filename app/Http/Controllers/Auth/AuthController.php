@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Profile;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -97,6 +98,10 @@ class AuthController extends Controller
         }
 
         $user = $this->create($request->all());
+        //Create new profile
+        $profile = new Profile();
+        $profile->user_id = $user->id;
+        $user->profile()->save($profile);
 
         $this->activationService->sendActivationMail($user);
 
