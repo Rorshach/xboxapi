@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function show()
     {
-        //Grab User ID + encrypted API
+        //Grab encrypted API
         $encrypted_api = \Auth::user()->api;
 
         //If API is filled in DB
@@ -39,6 +39,7 @@ class UserController extends Controller
                 $decrypted_api = decrypt($encrypted_api);
                 $apiRes = call_API($decrypted_api,"profile");
 
+                //Check if currently stored API Key is still working
                 if(isset($apiRes['error_code'])) {
                     return view('user')->withErrors([$apiRes['error_message']]);
                 }
@@ -47,7 +48,7 @@ class UserController extends Controller
                 return view('user',['gamerTag'=> $apiRes['gamerTag']]);
 
             } catch (DecryptException $e) {
-                return view('user')->withErrors(['Error Retrieving API Key, Try resubmitting the key']);
+                return view('user')->withErrors(['Error Retrieving API Key, Try again or Try resubmitting the key']);
             }
         } else {
 

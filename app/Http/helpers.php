@@ -20,29 +20,6 @@ use GuzzleHttp\Client;
 
         $response_string = $res->getBody()->getContents();
         return json_decode($response_string, true);
-    }
-
-    /**
-    *   Check if API Key is valid
-    *
-    *
-    */
-    function check_API($api) {
-        if(strlen($api) < 40) {
-            return false;
-        }
-        $client = new GuzzleHttp\Client(['headers' => ['X-AUTH' => $api]]);
-        $url_call = "https://xboxapi.com/v2/profile";
-
-        if ($client->request('GET',$url_call, ['http_errors' => false])->getStatusCode() != 202)
-            return false;
-        else
-            return true;
-
-
 
     }
-
-
-
  ?>

@@ -18,6 +18,7 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+Route::post('/home/msg_post', 'HomeController@post');
 
 Route::get('/user', 'UserController@show');
 Route::post('/user/api_post', 'UserController@post');
