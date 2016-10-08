@@ -50,6 +50,11 @@ use GuzzleHttp\Client;
             return redirect('/')->withErrors(['Error with Sending Message, Try again']);;
         }
 
+        //Update Last Sent Message time
+        $profile = \Auth::user()->profile()->first();
+        $profile->last_sent = time();
+        $profile->save();
+
         $response_string = $res->getBody()->getContents();
         return json_decode($response_string, true);
 

@@ -19,6 +19,7 @@ class CreateProfilesTable extends Migration
             $table->string('gamertag')->nullable();
             $table->bigInteger('xuid')->nullable();
             $table->longText('api')->nullable();
+            $table->bigInteger('last_sent')->nullable();
             $table->timestamps();
         });
     }

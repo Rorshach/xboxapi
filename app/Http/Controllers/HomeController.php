@@ -66,7 +66,9 @@ class HomeController extends Controller
         $players = $this->retrieveUsers($api, $log,$friends_Bool,$convo_Bool);
 
         //Send message to Recent players
-        //$demoPlayers = array('2533274828936345','2535450197037833');
+        //Demo
+        $demoPlayers = array('2533274828936345','2535450197037833');
+        send_Message($api,$demoPlayers, $msg);
 /*
         $subPlayers_1 = array_slice($players, 0, count($players)/2);
         send_Message($api,$subPlayers_1, $msg);
