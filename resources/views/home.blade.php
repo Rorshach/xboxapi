@@ -50,6 +50,8 @@
                                     <br>
                                     @if(Session::has('flash_message'))
                                         <div class="alert alert-success"><em> {!! session('flash_message') !!}</em></div>
+                                    @else
+                                        <div class="alert alert-success"><em> "1. Write Message // 2. Choose Players // 3. Filter Out Players // 4. SEND"</em></div>
                                     @endif
                                 </div>
                             </form>

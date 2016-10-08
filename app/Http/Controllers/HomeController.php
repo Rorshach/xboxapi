@@ -36,8 +36,6 @@ class HomeController extends Controller
             $recent_JSON = call_API($api,"recent-players");
             $uniqueGames = array_unique(array_map(function ($i) { return $i['titles'][0]['titleName']; }, $recent_JSON));
 
-            //PUT HERE AFTER YOU SAVE
-            \Session::flash('flash_message',"1. Write Message // 2. Choose Players // 3. Filter Out Players // 4. SEND");
         }
         return view('home',['uniqueGames' => $uniqueGames]);
     }
@@ -68,10 +66,16 @@ class HomeController extends Controller
         $players = $this->retrieveUsers($api, $log,$friends_Bool,$convo_Bool);
 
         //Send message to Recent players
-        //$playerCount = $this->sendMessage($api, $msg, $players);
+        //$demoPlayers = array('2533274828936345','2535450197037833');
+/*
+        $subPlayers_1 = array_slice($players, 0, count($players)/2);
+        send_Message($api,$subPlayers_1, $msg);
+        $subPlayers_2 = array_slice($players, (count($players)/2)+1, count($players));
+        send_message($api,$subPlayers_2, $msg);
+*/
+        \Session::flash('flash_message',"Successfully Sent Message to ".count($players)." players");
 
-
-        //return redirect('/home');
+        return redirect('home');
     }
 
     /**
@@ -105,30 +109,18 @@ class HomeController extends Controller
             $friendsID = array_column($friendsJSON, 'id');
             $finalPlayers = array_diff($finalPlayers,$friendsID);
         }
-        var_dump($finalPlayers);
 
+        //Remove recently messaged players?
         if (isset($convo)) {
             $convo_JSON = call_API($api,"conversations");
             $convoID = array_column($convo_JSON, 'senderXuid');
             $finalPlayers = array_diff($finalPlayers,$convoID);
         }
-        
-        return $finalPlayers;
-    }
 
-    /**
-    *
-    *Send Message to Players through Xbox live
-    *
-    */
-    public function sendMessage($api, $msg, $players) {
-
-        $count = 0;
-        $playerLimit = array();
-        foreach($players as $p) {
-            //Put player into playerLimit
-                //Count playerLimit Array
-
+        if(count($finalPlayers) > 60) {
+            $finalPlayers = array_slice($finalPlayers, 0, 60);
         }
+
+        return $finalPlayers;
     }
 }
