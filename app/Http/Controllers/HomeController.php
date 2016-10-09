@@ -17,6 +17,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('lockout');
     }
 
     /**
@@ -77,7 +78,7 @@ class HomeController extends Controller
 */
         \Session::flash('flash_message',"Successfully Sent Message to ".count($players)." players");
 
-        return redirect('home');
+        return redirect('lockout');
     }
 
     /**

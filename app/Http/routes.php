@@ -23,4 +23,6 @@ Route::post('/home/msg_post', 'HomeController@post');
 Route::get('/user', 'UserController@show');
 Route::post('/user/api_post', 'UserController@post');
 
+Route::get('/lockout', 'LockoutController@show');
+
 Route::get('user/activation/{token}', 'Auth\AuthController@activateUser')->name('user.activate');

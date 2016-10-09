@@ -32,8 +32,8 @@
                                 <i class="fa fa-btn fa-sign-in"></i> Update
                             </button>
                         </div>
-
                     </form>
+                    <p><a class="btn btn-primary" href="/" role="button">Mass Messenger</a></p>
                 </div>
             </div>
         </div>
