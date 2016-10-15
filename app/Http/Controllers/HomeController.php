@@ -68,14 +68,14 @@ class HomeController extends Controller
 
         //Send message to Recent players
         //Demo
-        $demoPlayers = array('2533274828936345','2535450197037833');
-        send_Message($api,$demoPlayers, $msg);
-/*
+        //$demoPlayers = array('2533274828936345','2535450197037833');
+        //send_Message($api,$demoPlayers, $msg);
+
         $subPlayers_1 = array_slice($players, 0, count($players)/2);
         send_Message($api,$subPlayers_1, $msg);
         $subPlayers_2 = array_slice($players, (count($players)/2)+1, count($players));
         send_message($api,$subPlayers_2, $msg);
-*/
+
         \Session::flash('flash_message',"Successfully Sent Message to ".count($players)." players");
 
         return redirect('lockout');

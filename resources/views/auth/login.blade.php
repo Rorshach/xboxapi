@@ -63,13 +63,18 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
-
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
                     </form>
-                    <a class="btn btn-primary" href="{{ route('social.login', ['facebook']) }}">Login With Facebook</a>
-                    <a class="btn btn-primary" href="{{ route('social.login', ['google']) }}">Login With Google</a>
+                    <hr>
+                    <h4 class="text-center"> Or Login With</h4>
+                    <div class="row">
+                        <div style="text-align:center">
+                            <a class="btn btn-primary" href="{{ route('social.login', ['facebook']) }}"><i class="fa fa-btn fa-facebook"></i>| Facebook</a>
+                            <a class="btn btn-danger"  href="{{ route('social.login', ['google']) }}"><i class="fa fa-btn fa-google"></i>| Google</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

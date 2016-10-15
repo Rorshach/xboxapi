@@ -17,8 +17,13 @@
                 <div class="panel-heading">Main Messenger</div>
                 <div class="panel-body">
                     @if (!Auth::user()->profile()->first()->api)
-                        <h5>API Key has not been filled yet </h5>
-                        <p><a class="btn btn-primary btn-lg" href="/user" role="button">Input API Key</a></p>
+                        <h3 class="text-center">API Key has not been filled yet </h3>
+                        <hr>
+                        <div class="row">
+                            <div style="text-align:center">
+                                <a class="btn btn-primary" href="/user" role="button"><i class="fa fa-btn fa-cog"></i>Input API Key</a>
+                            </div>
+                        </div>
                     @else
                         <div class="row">
                             <form role="form" method="POST" action="{{ url('/home/msg_post')  }}">
