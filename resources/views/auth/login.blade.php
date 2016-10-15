@@ -68,8 +68,8 @@
                             </div>
                         </div>
                     </form>
-                    <a class="btn btn-primary" href="{{ route('social.login', ['facebook']) }}">Facebook</a>
-                    <a class="btn btn-primary" href="{{ route('social.login', ['google']) }}">Google</a>
+                    <a class="btn btn-primary" href="{{ route('social.login', ['facebook']) }}">Login With Facebook</a>
+                    <a class="btn btn-primary" href="{{ route('social.login', ['google']) }}">Login With Google</a>
                 </div>
             </div>
         </div>
