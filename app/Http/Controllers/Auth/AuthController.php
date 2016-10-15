@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Profile;
 use App\User;
 use Validator;
+use Socialite;
 use App\Http\Controllers\Controller;
 use App\ActivationService;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -36,14 +37,46 @@ class AuthController extends Controller
     protected $redirectTo = '/';
 
     /**
-     * Create a new authentication controller instance.
+     * Redirect the user to the GitHub authentication page.
      *
-     * @return void
+     * @return Response
      */
-    // public function __construct()
-    // {
-    //     $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
-    // }
+    public function redirectToProvider($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return Response
+     */
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+
+        // stroing data to our use table and logging them in
+      $data = [
+          'email' => $user->getEmail()
+      ];
+      $user = User::firstOrCreate($data);
+      $checkProfile = Profile::where('user_id',$user->id)->exists();
+      if (!$checkProfile) {
+          $profile = new Profile();
+          $profile->user_id = $user->id;
+          $user->profile()->save($profile);
+      }
+
+      \Auth::login($user);
+    //   //Create new profile
+    //   $profile = new Profile();
+    //   $profile->user_id = $user->id;
+    //   $user->profile()->save($profile);
+
+      //after login redirecting to home page
+      return redirect($this->redirectPath());
+
+    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -99,9 +132,7 @@ class AuthController extends Controller
 
         $user = $this->create($request->all());
         //Create new profile
-        $profile = new Profile();
-        $profile->user_id = $user->id;
-        $user->profile()->save($profile);
+        $user->profile()->save(new Profile);
 
         $this->activationService->sendActivationMail($user);
 
