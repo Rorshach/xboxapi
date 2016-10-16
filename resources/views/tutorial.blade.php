@@ -54,6 +54,8 @@
                         <p>It's done, your Xbox API Key is now filled in. You can now send messages to 60 recent players every 24 hours</p>
                         <img src="http://i.imgur.com/nUe4DK8.png" alt="Responsive image" class="img-responsive img-thumbnail center-block">
                         <br>
+                        <h4>Final Few Words</h4>
+                        <p>If you encounter any problems, please contact <a target="_blank" href="https://account.xbox.com/en-us/profile?gamerTag=cog%20integrity">COG Integrity</a> on Xbox Live.</p>
                     </div>
                 </div>
             </div>
