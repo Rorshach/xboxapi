@@ -59,6 +59,7 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/tutorial') }}"><i class="fa fa-btn fa-question"></i>Tutorial</a></li>
                                 <li><a href="{{ url('/user') }}"><i class="fa fa-btn fa-cog"></i>Settings</a></li>
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
                             </ul>

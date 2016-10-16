@@ -28,3 +28,6 @@ Route::post('/user/api_post', 'UserController@post');
 Route::get('/lockout', 'LockoutController@show');
 
 Route::get('user/activation/{token}', 'Auth\AuthController@activateUser')->name('user.activate');
+Route::get('/tutorial', function() {
+        return view('tutorial');
+})->middleware('auth');
