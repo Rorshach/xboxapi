@@ -35,7 +35,8 @@
                     <div class="row">
                         <div style="text-align:center">
                             <a class="btn btn-primary" href="/"><i class="fa fa-btn fa-pencil"></i>Mass Messenger</a>
-                            <a class="btn btn-success" target="_blank" href="https://xboxapi.com/"><i class="fa fa-btn fa-key"></i>XboxAPI</a>
+                            <a class="btn btn-success" target="_blank" href="https://xboxapi.com/profile"><i class="fa fa-btn fa-key"></i>XboxAPI</a>
+                            <a class="btn btn-info" target="_blank" href="http://i.imgur.com/BAOtpOY.png"><i class="fa fa-btn fa-camera"></i>Sample API Key</a>
                         </div>
                     </div>
                 </div>
